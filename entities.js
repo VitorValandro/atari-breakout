@@ -4,8 +4,9 @@ function Player(x, y, width, heigth, ctx) {
   this.y = y;
   this.width = width;
   this.heigth = heigth;
+  
   this.drawPlayer = () => {
-    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.fillStyle = "#9400d3";
     this.ctx.fillRect(this.x, this.y, this.width, this.heigth);
   }
   this.speedX = 0;
@@ -37,19 +38,58 @@ function Player(x, y, width, heigth, ctx) {
   }
 }
 
-function Ball(x, y, radius, ctx){
+function Ball(x, y, radius, level, ctx){
   this.ctx = ctx;
   this.x = x;
   this.y = y;
   this.radius = radius;
-  this.speed = 1;
+  this.level = level;
   this.aceleration = 2;
   this.direction;
   this.circle;
+  this.levelSpeed = {
+    0: 1.5,
+    1: 1.25,
+    2: 1,
+    3: 0.75,
+    4: 0.5
+  }
+  this.speed = this.levelSpeed[this.level];
   
   this.ballStart = () => {
     directions = ['rightUp', 'leftUp'];
     this.direction = directions[Math.floor(Math.random() * directions.length)];
+  }
+
+  this.ballChangeDirection = (collision) => {
+    if(collision){
+      revertDirections = {
+        'playerCollide': {
+          'rightUp': 'rightDown',
+          'leftUp': 'leftDown',
+          'rightDown': 'rightUp',
+          'leftDown': 'leftUp'
+        },
+        'wallCollide': {
+          'rightUp': 'leftDown',
+          'leftUp': 'rightDown',
+          'rightDown': 'leftDown',
+          'leftDown': 'rightDown'
+        },
+        'topCollide':{
+          'rightUp': 'rightDown',
+          'leftUp': 'leftDown',
+          'leftDown': 'rightDown',
+          'rightDown': 'leftDown'
+        }
+      }
+      
+      this.direction = revertDirections[collision][this.direction];
+    }
+    else{
+      // explícito é melhor que implícito :)
+      this.direction = this.direction;
+    }
   }
 
   this.ballMovement = () => {
@@ -65,9 +105,11 @@ function Ball(x, y, radius, ctx){
       case 'leftDown':
         this.x -= this.speed;
         this.y += this.speed;
+        break;
       case 'rightDown':
         this.x += this.speed;
         this.y += this.speed;
+        break;
     }
   }
 
@@ -77,5 +119,20 @@ function Ball(x, y, radius, ctx){
     this.ctx.closePath();
     this.ctx.fillStyle = "#FFFFFF";
     this.ctx.fill();
+  }
+}
+
+function Block(x, y, width, heigth, color, level, ctx){
+  this.ctx = ctx;
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.heigth = heigth;
+  this.color = color;
+  this.level = level;
+
+  this.drawBlock = () => {
+    this.ctx.fillStyle = this.color;
+    this.ctx.fillRect(this.x, this.y, this.width, this.heigth);
   }
 }
