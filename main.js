@@ -1,16 +1,38 @@
+const canvasTextScreen = document.getElementById("canvasTextScreen");
+canvasTextScreen.style.display = 'none';
+
 const canvas = document.getElementById("gameScreen");
-var ctx = canvas.getContext("2d");
+
+const WIDTH = 800;
+const HEIGTH = 400;
+
+canvas.width = WIDTH;
+canvas.heigth = HEIGTH;
+
+const ctx = canvas.getContext("2d");
 
 ctx.fillStyle = '#000';
-ctx.fillRect(0,0,800,400);
+ctx.font = "30px Rajdhani";
+ctx.fillRect(0,0,WIDTH,HEIGTH);
 
 const game = {
+  restart: false,
+  pointsDict:{
+    4:10,
+    3:20,
+    2:30,
+    1:40,
+    0:50
+  },
   timerId: 0,
   timerTicks: 0,
+  pause: false,
   gameLevel: 0,
+  gamePoints: 0,
+  playerLifes: 4,
   update: updateGameArea,
-  player: new Player(325, 350, 150, 10, ctx),
-  ball: new Ball(392, 400, 8, 4, ctx),
+  player: new Player((WIDTH/2) - (150/2), 350, 150, 10, ctx),
+  ball: new Ball((WIDTH/2) - 8, HEIGTH, 8, 4, ctx),
   level0Blocks: generateBlocks(0, ctx),
   level1Blocks: generateBlocks(1, ctx),
   level2Blocks: generateBlocks(2, ctx),
@@ -27,31 +49,39 @@ let allLevelBlocks = [
 ]
 
 function updateGameArea(){
-  game.timerTicks += 1;
-  ctx.fillStyle = '#000';
-  ctx.fillRect(0, 0, 800, 400);
-  game.player.movePlayer();
-  for(let i=0; i < allLevelBlocks.length; i++){
-    for(let j=0; j < allLevelBlocks[i].length; j++){
-      allLevelBlocks[i][j].drawBlock();
+  if(!game.pause){
+    game.timerTicks += 1;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, WIDTH, HEIGTH);
+    game.player.movePlayer();
+    for(let i=0; i < allLevelBlocks.length; i++){
+      for(let j=0; j < allLevelBlocks[i].length; j++){
+        allLevelBlocks[i][j].drawBlock();
+      }
     }
-  }
 
-  game.ball.ballMovement();
-  game.ball.drawBall();
-  game.player.drawPlayer();
-  if (game.timerTicks > 100){
-    game.ball.ballChangeDirection(detectCollision(game.ball, game.player));
-  }
-  
-  let blockThatCollide = detectBlockCollision(game.ball, allLevelBlocks);
-  if (blockThatCollide) {
-    allLevelBlocks[blockThatCollide[0]].splice([blockThatCollide[1]], 1)
-    game.ball.ballChangeDirection('topCollide');
-    if(blockThatCollide[0] < game.ball.level){
-      game.ball.speed = game.ball.levelSpeed[blockThatCollide[0]];
+    game.ball.ballMovement();
+    game.ball.drawBall();
+    game.player.drawPlayer();
+    if (game.timerTicks > 100){
+      game.ball.ballChangeDirection(detectCollision(game.ball, game.player));
+    }
+    
+    let blockThatCollide = detectBlockCollision(game.ball, allLevelBlocks);
+    if (blockThatCollide) {
+      game.gamePoints += game.pointsDict[blockThatCollide[0]];
+      allLevelBlocks[blockThatCollide[0]].splice([blockThatCollide[1]], 1)
+      game.ball.ballChangeDirection('topCollide');
+      if(blockThatCollide[0] < game.ball.level){
+        game.ball.speed = game.ball.levelSpeed[blockThatCollide[0]];
+      }
+    }
+    if(game.playerLifes < 0){
+      gameOver();
     }
   }
+  ctx.fillStyle = 'orange';
+  ctx.fillText(game.playerLifes+1, 20, HEIGTH-20);
 }
 
 game.ball.ballStart();
@@ -70,5 +100,9 @@ function controlKeydown(event) {
     case 39: // -> right
       game.player.changePlayerMovement('right');
       break;
+    case 32:
+      if(game.restart){
+        break;
+      }
   }
 }

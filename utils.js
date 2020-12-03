@@ -1,3 +1,5 @@
+const { clear } = require("console");
+
 function generateBlocks(level, ctx){
   let blocksArray = [];
 
@@ -22,11 +24,14 @@ function detectCollision(ball, obj2) {
     }
   }
   // colisão com as paredes
-  if ((ball.x > 800) || (ball.x < 0)) {
+  if ((ball.x > WIDTH) || (ball.x < 0)) {
     return 'wallCollide';
   }
   if (ball.y < 0) {
     return 'topCollide';
+  }
+  if (ball.y > HEIGTH+10){
+    ball.ballOver();
   }
   return false;
 }
@@ -44,4 +49,12 @@ function detectBlockCollision(ball, blocksArray){
     }
   }
   return false;
+}
+
+function gameOver() {
+  clearInterval(game.timerId);
+  canvasTextScreen.style.display = 'block';
+  document.getElementById('topTitle').innerText = 'GAME OVER';
+  document.getElementById('centerSpan').innerText = game.gamePoints;
+  document.getElementById('bottomMessage').innerText = 'PRESS START TO PLAY AGAIN';
 }

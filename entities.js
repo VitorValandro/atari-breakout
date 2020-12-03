@@ -18,7 +18,7 @@ function Player(x, y, width, heigth, ctx) {
   }
 
   this.movePlayer = () => {
-    if (this.x >= 0 && this.x + this.width <= 800) {
+    if (this.x >= 0 && this.x + this.width <= WIDTH) {
       this.x += this.speedX;
       if (this.speedX != 0) {
         if (this.speedX > 0) {
@@ -32,7 +32,7 @@ function Player(x, y, width, heigth, ctx) {
     else if (this.x <= 0) {
       this.x = 0;
     }
-    else if (this.x + this.width >= 799) {
+    else if (this.x + this.width >= WIDTH-1) {
       this.x = 800 - this.width;
     }
   }
@@ -57,8 +57,32 @@ function Ball(x, y, radius, level, ctx){
   this.speed = this.levelSpeed[this.level];
   
   this.ballStart = () => {
+    this.x = (WIDTH/2)-8;
+    this.y = HEIGTH;
     directions = ['rightUp', 'leftUp'];
     this.direction = directions[Math.floor(Math.random() * directions.length)];
+  }
+
+  this.ballOver = () => {
+    game.playerLifes --;
+    if(game.playerLifes >= 0){
+      game.timerTicks = 0;
+      game.pause = true;
+      let count = 3;
+      let spanElement = document.getElementById("centerSpan");
+      spanElement.innerText = count;
+      let countdownSpan = setInterval(() => {
+        count--;
+        spanElement.innerText = count;
+      }, 750);
+      canvasTextScreen.style.display = 'block';
+      setTimeout(() => {
+        game.pause = false;
+        canvasTextScreen.style.display = 'none';
+        clearInterval(countdownSpan);
+      }, 3000);
+      this.ballStart();
+    }
   }
 
   this.ballChangeDirection = (collision) => {
