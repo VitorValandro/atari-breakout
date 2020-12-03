@@ -64,6 +64,9 @@ function Ball(x, y, radius, level, ctx){
   }
 
   this.ballOver = () => {
+    document.getElementById('topTitle').innerText = '';
+    document.getElementById('centerSpan').innerText = '';
+    document.getElementById('bottomMessage').innerText = '';
     game.playerLifes --;
     if(game.playerLifes >= 0){
       game.timerTicks = 0;

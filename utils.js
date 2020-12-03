@@ -1,5 +1,3 @@
-const { clear } = require("console");
-
 function generateBlocks(level, ctx){
   let blocksArray = [];
 
@@ -43,6 +41,7 @@ function detectBlockCollision(ball, blocksArray){
 
       if (ball.x > block.x && ball.x < block.x + block.width) {
         if (ball.y > block.y && ball.y < block.y + block.heigth) {
+          game.blocksDestroyed++;
           return ([i, j]);
         }
       }
@@ -51,10 +50,11 @@ function detectBlockCollision(ball, blocksArray){
   return false;
 }
 
-function gameOver() {
+function finishGame(message) {
   clearInterval(game.timerId);
   canvasTextScreen.style.display = 'block';
-  document.getElementById('topTitle').innerText = 'GAME OVER';
+  document.getElementById('topTitle').innerText = message;
   document.getElementById('centerSpan').innerText = game.gamePoints;
   document.getElementById('bottomMessage').innerText = 'PRESS START TO PLAY AGAIN';
+  game.canRestart = true;
 }
