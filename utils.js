@@ -24,7 +24,7 @@ function detectCollision(ball, obj2) {
   if (ball.x > obj2.x && ball.x < obj2.x + obj2.width) {
     if (ball.y > obj2.y && ball.y < obj2.y + obj2.heigth) {
       game.padHitAudio.sound.play();
-      return 'playerCollide';
+      return 'tabCollide';
     }
   }
   // colisão com as paredes

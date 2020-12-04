@@ -35,7 +35,7 @@ function gameState(){
   this.gamePoints = 0;
   this.playerLifes = 4;
   this.blocksDestroyed = 0;
-  this.player = new Player((WIDTH/2) - (150/2), 350, 150, 10, ctx);
+  this.tab = new Tab((WIDTH/2) - (150/2), 350, 150, 10, ctx);
   this.ball = new Ball((WIDTH/2) - 8, HEIGTH, 8, 4, ctx);
   this.level0Blocks = generateBlocks(0, ctx);
   this.level1Blocks = generateBlocks(1, ctx);
@@ -58,7 +58,7 @@ function updateGameArea(){
     game.timerTicks += 1;
     ctx.fillStyle = "#1f0020";
     ctx.fillRect(0, 0, WIDTH, HEIGTH);
-    game.player.movePlayer();
+    game.tab.moveTab();
     for(let i=0; i < game.allLevelBlocks.length; i++){
       for(let j=0; j < game.allLevelBlocks[i].length; j++){
         game.allLevelBlocks[i][j].drawBlock();
@@ -67,9 +67,9 @@ function updateGameArea(){
 
     game.ball.ballMovement();
     game.ball.drawBall();
-    game.player.drawPlayer();
+    game.tab.drawTab();
     if (game.timerTicks > 100){
-      game.ball.ballChangeDirection(detectCollision(game.ball, game.player));
+      game.ball.ballChangeDirection(detectCollision(game.ball, game.tab));
     }
     
     let blockThatCollide = detectBlockCollision(game.ball, game.allLevelBlocks);
@@ -97,17 +97,17 @@ function updateGameArea(){
 document.addEventListener('keydown', controlKeydown);
 canvas.addEventListener('mousemove', (event) => {
   if(game){
-    game.player.x = event.offsetX-75;
+    game.tab.x = event.offsetX-75;
   }
 })
 
 function controlKeydown(event) {
   switch (event.keyCode) {
     case 37: // <- left
-      game.player.changePlayerMovement('left');
+      game.tab.changeTabMovement('left');
       break;
     case 39: // -> right
-      game.player.changePlayerMovement('right');
+      game.tab.changeTabMovement('right');
       break;
     case 13:
       if(game.canRestart){

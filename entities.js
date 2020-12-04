@@ -1,23 +1,23 @@
-function Player(x, y, width, heigth, ctx) {
+function Tab(x, y, width, heigth, ctx) {
   this.ctx = ctx;
   this.x = x;
   this.y = y;
   this.width = width;
   this.heigth = heigth;
   
-  this.drawPlayer = () => {
+  this.drawTab = () => {
     this.ctx.fillStyle = "#9400d3";
     this.ctx.fillRect(this.x, this.y, this.width, this.heigth);
   }
   this.speedX = 0;
   this.friction = 0.95;
 
-  this.changePlayerMovement = (direction) => {
+  this.changeTabMovement = (direction) => {
     let directions = { 'left': -2, 'right': 2 };
     this.speedX = directions[direction];
   }
 
-  this.movePlayer = () => {
+  this.moveTab = () => {
     if (this.x >= 0 && this.x + this.width <= WIDTH) {
       this.x += this.speedX;
       if (this.speedX != 0) {
@@ -44,7 +44,6 @@ function Ball(x, y, radius, level, ctx){
   this.y = y;
   this.radius = radius;
   this.level = level;
-  this.aceleration = 2;
   this.direction;
   this.circle;
   this.levelSpeed = {
@@ -91,7 +90,7 @@ function Ball(x, y, radius, level, ctx){
   this.ballChangeDirection = (collision) => {
     if(collision){
       revertDirections = {
-        'playerCollide': {
+        'tabCollide': {
           'rightUp': 'rightDown',
           'leftUp': 'leftDown',
           'rightDown': 'rightUp',
