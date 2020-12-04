@@ -2,6 +2,7 @@ const canvasTextScreen = document.getElementById("canvasTextScreen");
 canvasTextScreen.style.display = 'none';
 
 const canvas = document.getElementById("gameScreen");
+canvas.style.display = 'none';
 
 const WIDTH = 800;
 const HEIGTH = 400;
@@ -11,11 +12,14 @@ canvas.heigth = HEIGTH;
 
 const ctx = canvas.getContext("2d");
 
-ctx.fillStyle = '#000';
-ctx.font = "30px Rajdhani";
+ctx.fillStyle = '#22003c';
 ctx.fillRect(0,0,WIDTH,HEIGTH);
 
+let game;
+
 function gameState(){ 
+  this.blockHitAudio = new Sound('assets/hit-block.wav');
+  this.padHitAudio = new Sound('assets/hit-pad.wav');
   canvasTextScreen.style.display = 'none';
   this.canRestart = false;
   this.pointsDict = {
@@ -49,12 +53,10 @@ function gameState(){
   this.timerId = setInterval(updateGameArea, 1);
 }
 
-let game = new gameState();
-
 function updateGameArea(){
   if(!game.pause){
     game.timerTicks += 1;
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = "#1f0020";
     ctx.fillRect(0, 0, WIDTH, HEIGTH);
     game.player.movePlayer();
     for(let i=0; i < game.allLevelBlocks.length; i++){
@@ -86,14 +88,17 @@ function updateGameArea(){
       finishGame('YOU WIN');
     }
   }
-  ctx.fillStyle = 'orange';
-  ctx.fillText(game.playerLifes+1, 20, HEIGTH-20);
-  console.log(game.blocksDestroyed)
+  ctx.font = "25px Rajdhani";
+  ctx.fillStyle = 'violet';
+  ctx.fillText(game.playerLifes + 1, 20, HEIGTH-20);
+  ctx.fillText(game.gamePoints, WIDTH-50, HEIGTH - 20);
 }
 
 document.addEventListener('keydown', controlKeydown);
 canvas.addEventListener('mousemove', (event) => {
-  game.player.x = event.layerX-75;
+  if(game){
+    game.player.x = event.offsetX-75;
+  }
 })
 
 function controlKeydown(event) {
@@ -108,5 +113,11 @@ function controlKeydown(event) {
       if(game.canRestart){
         game = new gameState();
       }
+      break;
   }
+}
+
+function startGame(){
+  canvas.style.display = 'block';
+  game = new gameState();
 }

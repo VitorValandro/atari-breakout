@@ -1,18 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
 
+body{
+  background: #4e0050;
+}
+
+#gameTitle{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  font-family:'Rajdhani', sans-serif;
+  color: rgb(250, 206, 250);
+  font-size: 5em;
+  text-shadow: 0px 0px 10px rgba(150, 150, 150, 1);
+}
+
 #canvasDiv{
   position: absolute;
-  left: 200px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
   width: 800px;
   height: 400px;
+  background-color: #22003c;
+  border: 2px solid  rgb(250, 206, 250);
 }
+
+#startButton{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  color:black;
+  text-align: center;
+  font-size:2em;
+  font-family: 'Rajdhani', sans-serif;
+  background-color: blueviolet;
+  width: 100px;
+  height: 50px;
+  border: none;
+}
+
 canvas{
   position: absolute;
+  top:0;
+  left: 0;
   border:0px solid black;
   z-index: 1;
 }
 #canvasTextScreen{
   position: absolute;
+  top:0;
+  left: 0;
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -51,4 +93,11 @@ canvas{
   text-align: center;
   font-size: 2em;
   font-family: 'Rajdhani', sans-serif;
+  animation: blinkElement 1.5s linear infinite;
 }
+
+@keyframes blinkElement {
+    from { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    to { opacity: 1.0; }
+}                    

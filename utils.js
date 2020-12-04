@@ -2,11 +2,16 @@ function generateBlocks(level, ctx){
   let blocksArray = [];
 
   let colors = {
-    0:'#730d73',
+    /*0:'#730d73',
     1:'#900090',
     2:'#ad00ad',
     3:'#cf33ff',
-    4:'#ff57ff'
+    4:'#ff57ff'*/
+    0:'#7B047B',
+    1:'#900090',
+    2:'#ad00ad',
+    3:'#BF0CBF',
+    4:'#D524D5'
   }
 
   for(let x=0;x<9;x++){
@@ -18,14 +23,17 @@ function generateBlocks(level, ctx){
 function detectCollision(ball, obj2) {
   if (ball.x > obj2.x && ball.x < obj2.x + obj2.width) {
     if (ball.y > obj2.y && ball.y < obj2.y + obj2.heigth) {
+      game.padHitAudio.sound.play();
       return 'playerCollide';
     }
   }
   // colisão com as paredes
   if ((ball.x > WIDTH) || (ball.x < 0)) {
+    game.blockHitAudio.sound.play();
     return 'wallCollide';
   }
   if (ball.y < 0) {
+    game.blockHitAudio.sound.play();
     return 'topCollide';
   }
   if (ball.y > HEIGTH+10){
@@ -41,6 +49,7 @@ function detectBlockCollision(ball, blocksArray){
 
       if (ball.x > block.x && ball.x < block.x + block.width) {
         if (ball.y > block.y && ball.y < block.y + block.heigth) {
+          game.blockHitAudio.sound.play();
           game.blocksDestroyed++;
           return ([i, j]);
         }
@@ -57,4 +66,19 @@ function finishGame(message) {
   document.getElementById('centerSpan').innerText = game.gamePoints;
   document.getElementById('bottomMessage').innerText = 'PRESS START TO PLAY AGAIN';
   game.canRestart = true;
+}
+
+function Sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function () {
+    this.sound.play();
+  }
+  this.stop = function () {
+    this.sound.pause();
+  }
 }

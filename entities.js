@@ -144,7 +144,7 @@ function Ball(x, y, radius, level, ctx){
     this.ctx.beginPath();
     this.circle = this.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
     this.ctx.closePath();
-    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.fillStyle = "#FACEFA";
     this.ctx.fill();
   }
 }

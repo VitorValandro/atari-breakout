@@ -7,8 +7,9 @@
     <title>Document</title>
   </head>
   <body>
-    MENU
+    <span id='gameTitle'>ATARI BREAKOUT</span>
     <div id='canvasDiv'>
+      <button id='startButton' onclick=startGame()>START</button>
       <canvas id="gameScreen" width="800" height="400"></canvas>
       <div id="canvasTextScreen">
         <span id='topTitle'></span>
@@ -16,6 +17,7 @@
         <span id='bottomMessage'></span>
       </div>
     </div>
+    
 
     <script src="./entities.js"></script>
     <script src="./utils.js"></script>
