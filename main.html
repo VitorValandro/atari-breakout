@@ -7,17 +7,49 @@
     <title>Atari Breakout</title>
   </head>
   <body>
+    <a id='soundButton' onclick="muteSound()">
+      <img id='soundImg' src="assets/unmute.png" width="32" height="32"/>
+    </a>
     <span id='gameTitle'>ATARI BREAKOUT</span>
+    <img id='infoButton' src="assets/information.png" width="32" height="32" onclick=showInfo()>
     <div id='canvasDiv'>
       <button id='startButton' onclick=startGame()>START</button>
       <canvas id="gameScreen" width="800" height="400"></canvas>
+      
       <div id="canvasTextScreen">
         <span id='topTitle'></span>
         <span id='centerSpan'></span>
         <span id='bottomMessage'></span>
       </div>
     </div>
-    
+    <div id='infoDiv'>
+      <span id="closeInfo" onclick="showInfo()">&times;</span>
+      <span class='infoTitle'>Remake do Atari Breakout</span>
+      <div id='instructions'>
+        <p class='infoTitle' style="font-size: 2em; left: 0; top: 0;">Instruções de jogo</p>
+        <br>
+        <span>Use o mouse ou as setas do teclado para jogar</span>
+        <br>
+        <span>Rebata a bola até destruir todos os blocos sem deixar que ela caia</span>
+      </div>
+      <br>
+      <div id='credits'>
+        <p class='infoTitle' style="font-size: 2em; left: 0; top:0%">Créditos</p>
+        <br>
+        <span>Desenvolvido por:</span>
+        <span>
+          <br>
+          <ul>
+            <li>Guilherme Pegoraro</li>
+            <li>Luis Eduardo Bet</li>
+            <li>Vitor Valandro da Rosa</li>    
+          </ul>
+          <br>
+        </span>
+        <br>
+        <span style="bottom:0">Visite o repositório no <a href='#'>Github</a></span>
+      </div>
+    </div>
 
     <script src="./entities.js"></script>
     <script src="./utils.js"></script>

@@ -2,6 +2,8 @@
 
 body{
   background: #4e0050;
+  margin:0;
+  padding: 0;
 }
 
 #gameTitle{
@@ -103,6 +105,83 @@ canvas{
   font-size: 2em;
   font-family: 'Rajdhani', sans-serif;
   animation: blinkElement 1.5s linear infinite;
+}
+
+#infoButton{
+  position: absolute;
+  bottom: 5%;
+  right: 2.5%;
+  cursor: pointer;
+}
+
+#infoDiv{
+  position: relative;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  background: rgba(26, 0, 41, 0.9);
+  font-size: 1.2em;
+}
+
+#closeInfo{
+  position: absolute;
+  top: 8%;
+  right: 5%;
+  font-size: 5em;
+  color: rgb(250, 206, 250);
+  text-shadow: 0px 0px 10px rgba(150, 150, 150, 1);
+  cursor: pointer;
+}
+
+.infoTitle{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-size: 3em;
+  color: rgb(250, 206, 250);
+  text-shadow: 0px 0px 10px rgba(150, 150, 150, 1);
+}
+
+#instructions{
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 90vw;
+  height: 500px;
+}
+#instructions span{
+  position: absolute;
+  margin-top: 60px;
+}
+
+#credits{
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  width: 90vw;
+  height: 225px;
+}
+
+#credits span{
+  position: absolute;
+  margin-top: 60px;
+}
+
+#credits span a{
+  text-decoration: none;
+  color: rgb(250, 206, 250);
+  text-shadow: 0px 0px 10px rgba(150, 150, 150, 1);
+}
+
+#soundButton{
+  position: absolute;
+  bottom: 12.5%;
+  right: 2.5%;
+  cursor: pointer;
 }
 
 @keyframes blinkElement {

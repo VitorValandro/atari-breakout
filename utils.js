@@ -82,3 +82,27 @@ function Sound(src) {
     this.sound.pause();
   }
 }
+function muteSound(){
+  let audios = document.querySelectorAll("audio");
+  for(let i=0;i<audios.length;i++){
+    if(muteFlag){
+      audios[i].muted = false;
+      document.getElementById('soundImg').src = 'assets/unmute.png';
+    }
+    else{
+      audios[i].muted = true;
+      document.getElementById('soundImg').src = 'assets/mute.png';
+    }
+  }
+  muteFlag = !muteFlag;
+}
+
+function showInfo(){
+  if(infoFlag){
+    document.getElementById('infoDiv').style.display = 'none';
+  }
+  else{
+    document.getElementById('infoDiv').style.display = 'flex';
+  }
+  infoFlag = !infoFlag;
+}

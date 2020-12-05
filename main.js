@@ -10,6 +10,9 @@ const HEIGTH = 400;
 canvas.width = WIDTH;
 canvas.heigth = HEIGTH;
 
+let muteFlag = false;
+let infoFlag = false;
+
 const ctx = canvas.getContext("2d");
 
 ctx.fillStyle = '#22003c';
