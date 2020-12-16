@@ -9,10 +9,10 @@ It is like the original arcade, the player controls a bar that bounces the ball 
 ## About the project
 
 This game was developed with pure javascript and the HTML5 Canvas as an technical schoolwork. 
-It was simple to make the game, it has few and simple features, but it was still fun. I got the sounds from a public database and without DMCA.
+It was simple to make the game, it has few and simple features, but it was still fun. We got the sounds from a public database and without DMCA.
 
 ### Project finished and closed
 
-The game has simple features and has nothing I would like to add, is just a simple homework, so it is finished! If you want to contribute or use the code as an example, just clone it and do whatever you want.
+The game has simple features and has nothing we would like to add, is just a simple homework, so it is finished! If you want to contribute or use the code as an example, just clone it and do whatever you want.
 
 ###### Vitor Matheus Valandro da Rosa. December 2020.
