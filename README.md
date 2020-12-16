@@ -1,5 +1,6 @@
 # Atari Breakout
-![Game screenshot](https://user-images.githubusercontent.com/50156875/102342913-af068e80-3f78-11eb-92e2-212972386b86.png)
+![Game screenshots](https://user-images.githubusercontent.com/50156875/102343797-c5611a00-3f79-11eb-9ca2-fb955f3ec060.jpg)
+
 This Breakout remake was made in javascript and HTML5 as homework for the subject of Web Development II.
 
 ## The game
